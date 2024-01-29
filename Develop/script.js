@@ -4,6 +4,9 @@
 $(document).ready(function(){
   var saveBtn = $('.saveBtn');
   var eventPlan = $('.description');
+  var pastTime = $('.past');
+  var presentTime = $('.present');
+  var futureTime = $('.future');
   console.log(saveBtn);
   console.log(eventPlan);
 var today = dayjs();
@@ -17,13 +20,32 @@ $(function () {
     // useful when saving the description in local storage?
     //
     saveBtn.on('click', function(){
+      // Get the parent time-block's ID
+    var timeBlockId = $(this).parent().attr('id');
+    // Get the user input from the corresponding textarea
+    var eventContent = $(this).siblings('.description').val();
       console.log('Button Works');
+      // Save the user input to local storage using the time block's ID as the keyname and the event content as the Key value
+    localStorage.setItem(timeBlockId, JSON.stringify(eventContent));
+    console.log(JSON.parse(localStorage.getItem(timeBlockId)));
     })
+
+    
     // TODO: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
     // attribute of each time-block be used to conditionally add or remove the
     // past, present, and future classes? How can Day.js be used to get the
     // current hour in 24-hour time?
+    $('.present').each(function(){
+      currentTimeRed = today.hour();//assigned a variable to the current hour of the day
+
+      console.log(currentTimeRed);
+
+    }); 
+
+
+    
+
     //
     // TODO: Add code to get any user input that was saved in localStorage and set
     // the values of the corresponding textarea elements. HINT: How can the id
@@ -31,4 +53,17 @@ $(function () {
     //
     // TODO: Add code to display the current date in the header of the page.
   });
+  //Iterates through tim blocks to add previously stored data from local storage to specific time block
+  function loadEvents() {
+    $('.time-block').each(function() {
+      var timeBlockId = $(this).attr('id');
+      var savedText = localStorage.getItem(timeBlockId);
+
+      if (savedText !== null) {
+        $(this).children('.description').val(JSON.parse(savedText));
+      }
+    });
+  }
+
+  loadEvents()
   });
