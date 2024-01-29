@@ -40,9 +40,10 @@ THEN the saved events persist
 //use day.js in javascript file to append the current day to the top of the calendar
 //add timeslots for other times in html file
 //create event listener for save button
-//save input from what you type in local storage
+//save input from what you type in local storage(setItem(), getItem())
+//create function to iterate through time slots
 //Create if statment
-//Set the conditions of the if statment to update the color based on the current time(day.js (if dayjs() = 9am for example), if statment)
+//Set the conditions of the if statment to update the color based on the current time start by assigning a variable to the current time (today.hour())
 //add local storage for data entered into textarea to be saved so it persists even if page closes
 The following animation demonstrates the application functionality:
 
